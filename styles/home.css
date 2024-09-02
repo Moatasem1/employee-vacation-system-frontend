@@ -1,0 +1,45 @@
+/* ----------------------- start user profile summary and statistics ----------------------- */
+
+.user-profile__img-wrapper{
+    width: 3rem;
+    height: 3rem;
+}
+
+.statistics__icon{
+    font-size: 4rem;
+}
+
+#vacation-requests,
+#leave-requests{
+    font-size: 5rem;
+}
+
+/* ----------------------- end user profile summary and statistics ----------------------- */
+
+/* ----------------------- start latest news carousel ----------------------- */
+
+.lates-news .carousel img{
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  object-fit: cover;
+}
+
+@media (min-width: 992px) {
+    .lates-news .carousel img{
+        aspect-ratio: 4 / 1;
+      }
+      
+}
+
+.lates-news .carousel .carousel-caption{
+    background-color: hsl(0, 0%, 100%,70%);    
+}
+
+.lates-news .carousel .carousel-indicators button{
+    width: .7rem;
+    height: .7rem;
+    border-radius: 100%;
+    background-color: var(--color-subtext);
+}
+
+/* ----------------------- end latest news carousel ----------------------- */

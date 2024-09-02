@@ -20,14 +20,150 @@
     <link rel="stylesheet" href="styles/home.css" />
   </head>
 
-  <body>
-    <header id="navbar-container" class="fixed-top"></header>
-    <main></main>
+  <body class="text-dark">
+    <header id="navbar-container" class="sticky-top"></header>
+    <main>
+      <section class="welcome-wrapper py-5">
+        <div
+          class="container d-flex flex-column flex-md-row text-center text-md-start align-items-center justify-content-between gap-4 gap-md-5"
+        >
+          <h1 class="text-capitalize fw-semibold fs-2 my-0 lh-base">
+            Welcome Back <span id="user-name">Hazem</span> Here are your latest
+            updates.
+          </h1>
+          <button
+            type="button"
+            name="new request"
+            id="new-request"
+            class="btn btn-main text-capitalize"
+          >
+            new request
+          </button>
+        </div>
+      </section>
+      <section class="profile-summary py-4">
+        <div class="container">
+          <div
+            class="row gy-4 text-capitalize justify-content-center align-items-stretch"
+          >
+            <div class="col-12 col-sm-12 col-xl-6">
+              <div
+                class="user-profile shadow p-4 rounded-4 bg-secondary h-100 text-center text-md-start"
+              >
+                <header
+                  class="user-profile__header d-flex flex-column flex-md-row align-items-center justify-content-between gap-3"
+                >
+                  <div
+                    class="user-profile__info d-flex flex-column flex-md-row align-items-center gap-3"
+                  >
+                    <figure
+                      class="user-profile__img-wrapper d-flex align-items-center rounded-pill mb-0 overflow-hidden"
+                    >
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcg4Y51XjQ-zSf87X4nUPTQzsF83eFdZswTg&s"
+                        alt="user image not found"
+                        class="img-fluid"
+                      />
+                    </figure>
+                    <div class="user-profile__name-job-wrapper">
+                      <h2 class="fs-5 mb-0 fw-semibold">Ahamd Azmi</h2>
+                      <span class="text-secondary"
+                        >Junior Accounting Officer</span
+                      >
+                    </div>
+                  </div>
+                  <a
+                    name="view profile"
+                    id="view-profile"
+                    class="btn btn-secondary"
+                    href="#"
+                    role="button"
+                    >view profile</a
+                  >
+                </header>
+                <div
+                  class="user-profile__data-wrapper d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-md-start gap-5 mt-5"
+                >
+                  <div
+                    class="user-profile__data d-flex flex-column flex-md-row gap-3 align-items-center"
+                  >
+                    <i class="fa-solid fa-user fs-1 text-secondary"></i>
+                    <div>
+                      <h4 class="fs-6 fw-semibold mb-1">Reporting To:</h4>
+                      <span id="reporting-to" class="text-secondary"
+                        >Salwa Assem</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="user-profile__data d-flex flex-md-row flex-column gap-3 align-items-center"
+                  >
+                    <i class="fa-solid fa-chart-line fs-1 text-secondary"></i>
+                    <div>
+                      <h4 class="fs-6 fw-semibold mb-1">corporate level:</h4>
+                      <span id="corporate-level" class="text-secondary"
+                        >level 10</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <div
+                class="statistics text-light bg-main d-flex align-items-center justify-content-center gap-5 shadow p-4 rounded-4 h-100"
+              >
+                <div>
+                  <i class="statistics__icon fa-solid fa-list-check"></i>
+                  <span class="d-block text-center lh-sm mt-1"
+                    >vacation <br />
+                    requests</span
+                  >
+                </div>
+                <span id="vacation-requests" class="">10</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <div
+                class="statistics text-light bg-main d-flex align-items-center justify-content-center gap-5 shadow p-4 rounded-4 h-100"
+              >
+                <div>
+                  <i class="statistics__icon fa-solid fa-list-check"></i>
+                  <span class="d-block text-center lh-sm mt-1"
+                    >leave <br />
+                    requests</span
+                  >
+                </div>
+                <span id="leave-requests" class="">10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="lates-news py-5">
+        <div class="container text-capitalize">
+          <h2 class="fs-4 fw-semibold mb-3">lates news:</h2>
+          <div
+            id="lates-news-carousel"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div id="latest-news-carousel-inner" class="carousel-inner"></div>
+            <div
+              id="latest-news-carousel-indicators"
+              class="carousel-indicators position-relative mt-2"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
     <footer>
       <!-- place footer here -->
     </footer>
     <!-- general script print the header and footer -->
     <script src="/scripts/general.js"></script>
+    <!-- home script print the carsoul and footer -->
+    <script src="/scripts/home.js"></script>
     <!-- font awesome icons libarary  -->
     <script
       src="https://kit.fontawesome.com/6c455eb206.js"

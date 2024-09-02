@@ -1,46 +1,82 @@
 :root {
-    --color-background: white;
+    --color-background: #ffffff;
     --color-main: #247f3e;
     --color-secondary: #f6f6f6;
-    --color-text-dark: black;
-    --color-text-light: white;
+    --color-text-dark: #000000;
+    --color-text-light: #ffffff;
     --color-subtext: #6b6a6a;
+    --color-btn-main-hover: #1C6A32;
+    --color-btn-secondary-hover: #E0E0E0 ;
 }
 
 html{
     scroll-behavior: smooth;
 }
 
-/* start my classes */
-.bg-main{
-    background-color: var(--color-main);
+/* ------------------------------ start my classes ------------------------------ */
+.bg-main {
+    background-color: var(--color-main) !important;
 }
 
-.bg-secondary{
-    background-color: var(--color-secondary);
+.bg-secondary {
+    background-color: var(--color-secondary) !important;
 }
 
-.bg-background{
-    background-color: var(--color-background);
+.bg-background {
+    background-color: var(--color-background) !important;
 }
 
-.text-light{
-    color: var(--color-text-light);
+.text-light {
+    color: var(--color-text-light) !important;
 }
 
-.text-dark{
-    color: var(--color-text-dark);
+.text-dark {
+    color: var(--color-text-dark) !important;
 }
 
-.text-secondary{
-    color: var(--color-secondary);
+.text-secondary {
+    color: var(--color-subtext) !important;
 }
-/* end my classes */
 
-/*start navbar  */
+.btn-main,
+.btn-secondary {
+    padding-inline: 2rem !important;
+    transition: .3s !important;
+    white-space: nowrap !important;
+}
+
+.btn-main {
+    background-color: var(--color-main) !important;
+    color: var(--color-background) !important;
+}
+
+.btn-main:hover,
+.btn-main:focus {
+    background-color: var(--color-btn-main-hover) !important;
+    color: var(--color-background) !important;
+}
+
+.btn-secondary {
+    background-color: var(--color-background) !important;
+    color: var(--color-main) !important;
+    border: 1px solid var(--color-main) !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: var(--color-btn-secondary-hover) !important;
+    color: var(--color-main) !important;
+}
+
+/* ------------------------------ end my classes ------------------------------ */
+
+/* ------------------------------ start navbar ------------------------------ */
+
 .navbar .nav-link.active{
     font-weight: bold;
 }
+
+/* start: add hover effect to nav links  */
 
 .navbar .nav-link::after,
 .navbar .nav-link::before{
@@ -86,6 +122,11 @@ html{
     scale: 1;
 }
 
+/* end: add hover effect to nav links  */
+
+
+/* start: add hover effect to navbar icons */
+
 .navbar__icons-wrapper{
     padding-inline: 0.75rem;
     padding-block: 0.5rem;
@@ -100,6 +141,10 @@ html{
     transition: .3s;
     scale: 1.1;
 }
+
+/* end: add hover effect to navbar icons */
+
+/* start: fix and replace navbar toggeler icon */
 
 .navbar .navbar-toggler:focus{
     box-shadow: none;
@@ -152,4 +197,7 @@ html{
 .navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon__dash{
     transform: rotate(45deg) translateY(-300%);
 }
-/*end navbar  */
+
+/* end: fix and replace navbar toggeler icons */
+
+/* ------------------------------ end navbar ------------------------------ */
