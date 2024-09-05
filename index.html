@@ -16,8 +16,9 @@
       crossorigin="anonymous"
     />
     <!-- general styles have my defined class and the root values  -->
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/home.css" />
+    <link rel="stylesheet" href="/styles/general.css" />
+    <!-- styles related to this page -->
+    <link rel="stylesheet" href="/styles/home.css" />
   </head>
 
   <body class="text-dark">
@@ -120,7 +121,7 @@
                     requests</span
                   >
                 </div>
-                <span id="vacation-requests" class="">10</span>
+                <span id="vacation-requests-number" class="">10</span>
               </div>
             </div>
             <div class="col-12 col-sm-6 col-xl-3">
@@ -134,7 +135,7 @@
                     requests</span
                   >
                 </div>
-                <span id="leave-requests" class="">10</span>
+                <span id="leave-requests-number" class="">10</span>
               </div>
             </div>
           </div>
@@ -147,6 +148,7 @@
             id="lates-news-carousel"
             class="carousel slide"
             data-bs-ride="carousel"
+            data-bs-interval="10000"
           >
             <div id="latest-news-carousel-inner" class="carousel-inner"></div>
             <div
@@ -156,14 +158,17 @@
           </div>
         </div>
       </section>
+      <section id="vacation-requests-section" class="vacation-requests py-5">
+        <div class="container"></div>
+      </section>
     </main>
     <footer>
       <!-- place footer here -->
     </footer>
     <!-- general script print the header and footer -->
-    <script src="/scripts/general.js"></script>
+    <script type="module" src="/scripts/general.js"></script>
     <!-- home script print the carsoul and footer -->
-    <script src="/scripts/home.js"></script>
+    <script type="module" src="/scripts/home.js"></script>
     <!-- font awesome icons libarary  -->
     <script
       src="https://kit.fontawesome.com/6c455eb206.js"

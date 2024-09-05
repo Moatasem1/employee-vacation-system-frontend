@@ -1,24 +1,16 @@
+import { printHTML } from "./common.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     printHeader();
 });
 
 async function printHeader() {
-    const navbarContainer = document.getElementById("navbar-container");
 
-    if (!navbarContainer) return;
+    let navbarContainer = document.getElementById("navbar-container");
 
-    navbarContainer.innerHTML = await fetchHeader();
+    await printHTML(navbarContainer, "/master_pages/header.html", "/styles/header.css")
+
     assignActiveToCurrentPage();
-}
-
-async function fetchHeader() {
-    const response = await fetch("/pages/header.html");
-
-    if (response.ok) {
-        return response.text();
-    } else {
-        return "Unable to load the header :(";
-    }
 }
 
 function assignActiveToCurrentPage() {

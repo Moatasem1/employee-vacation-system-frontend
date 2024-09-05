@@ -1,0 +1,131 @@
+/* ------------------------------ start navbar ------------------------------ */
+
+.navbar .nav-link.active{
+    font-weight: bold;
+}
+
+/* start: add hover effect to nav links  */
+
+.navbar .nav-link::after,
+.navbar .nav-link::before{
+    content: "";
+    width: 0%;
+    background-color: var(--color-secondary);
+    position: absolute;
+    transition: .3s;
+    --nav-link-padding-x: .5rem;
+    --bottom: 3px;
+    /*
+    * Calculate the width of the pseudo-element `--before-width` as follows:
+    * - Start with 100% of the navlink item's width
+    * - Subtract the padding on both sides of the navlink item
+    * - Subtract 3px to provide space for the `after` pseudo-element
+    * - Subtract another 3px to account for the gap between the before and after pseudo-elements
+    */
+    --before-width: calc(100% - var(--nav-link-padding-x) * 2 - 3px - 3px);
+}
+
+.navbar .nav-link::before{
+    height: 1px;
+    bottom: var(--bottom);
+    left: var(--nav-link-padding-x);
+}
+
+.navbar .nav-link::after{
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    bottom: calc(var(--bottom) - .5px);
+    left: calc(var(--nav-link-padding-x) + var(--before-width) + 3px);
+    scale: 0;
+}
+
+.navbar .nav-link:hover::before,
+.navbar .nav-link.active::before{
+    width: var(--before-width);
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after{
+    scale: 1;
+}
+
+/* end: add hover effect to nav links  */
+
+
+/* start: add hover effect to navbar icons */
+
+.navbar__icons-wrapper{
+    padding-inline: 0.75rem;
+    padding-block: 0.5rem;
+}
+
+.navbar__icon{
+    transition: .3s;
+    scale: 1;
+}
+
+.navbar__icon:hover{
+    transition: .3s;
+    scale: 1.1;
+}
+
+/* end: add hover effect to navbar icons */
+
+/* start: fix and replace navbar toggeler icon */
+
+.navbar .navbar-toggler:focus{
+    box-shadow: none;
+}
+
+.navbar .navbar-toggler-icon{
+    background-image: none;
+}
+
+.navbar-toggler-icon__dash{
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-background);
+    --dashes-gap: 9px;
+}
+
+.navbar-toggler-icon__dash::before,
+.navbar-toggler-icon__dash::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background);
+    position: absolute;
+    left: 0;
+    transition: .3s;
+    transform-origin: center center;
+}
+
+.navbar-toggler-icon__dash::before{
+    bottom: var(--dashes-gap);
+}
+.navbar-toggler-icon__dash::after{
+    top: var(--dashes-gap);
+}
+
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon__dash{
+    background-color: transparent;
+}
+
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon__dash::after{
+    bottom: 50%;
+    transform: rotate(90deg);
+}
+
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon__dash::before{
+    top: 50%;
+    transform: rotate(180deg) translateY(-7.5px);
+}
+
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon__dash{
+    transform: rotate(45deg) translateY(-300%);
+}
+
+/* end: fix and replace navbar toggeler icons */
+
+/* ------------------------------ end navbar ------------------------------ */

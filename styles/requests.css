@@ -1,0 +1,95 @@
+/* ----------------------- start vacations requests ----------------------- */
+
+.vacation-request-action{
+    max-width: 600px;
+}
+
+.controls__checkbox {
+    width: .9rem;
+    height: .9rem;
+    border-radius: 3px;
+    border: 1px solid var(--color-main);
+    box-sizing: content-box;
+}
+
+.controls__checkbox::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(0);
+    scale: 0;
+    transition: .3s;
+}
+
+.controls__select-all:checked + label .controls__checkbox{
+    background-color: var(--color-main);
+}
+
+.controls__select-all:checked + label .controls__checkbox::after{
+    transform: rotate(45deg);
+    scale: 1;
+}
+
+/* start vacation request card */
+
+.vacation-requests-card__img{
+    width: 5rem;
+    height: 5rem;
+}
+
+.vacation-requests-card{
+    box-shadow: rgba(0, 0, 0, 0.24)  0px 3px 4px;
+    transition: .3s;
+}
+
+.vacation-requests-card:hover{
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.vacation-requests-card__select-icon::after{
+    content: "\f058";
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 300;
+    right: 1rem;
+    top: 1rem;
+    color: var(--color-subtext);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.vacation-requests-card__select-icon.vacation-requests-card__select-icon--selected::after{
+    color: var(--color-main);
+    font-weight: 900;
+}
+
+/* end vacation request card */
+
+/* start pagination */
+.pagination .page-item{
+ width: 2rem;
+ height: 2rem;
+ transition: .3s;
+}
+
+.pagination .page-item.page-item--active {
+    color: var(--color-text-light);  
+    background-color: var(--color-main);
+}
+
+.pagination .page-item.page-item--disable {
+    color: var(--color-subtext);
+    pointer-events: none;
+    opacity: .6;
+}
+
+/* end pagination */
+
+/* ----------------------- end vacations requests ----------------------- */
