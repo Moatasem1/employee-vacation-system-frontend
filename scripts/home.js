@@ -1,5 +1,5 @@
-import { printCardsPanel, } from "./common.js";
-import { vacationRequestsCardsData } from "./data.js";
+import { printCardsPanel, UserProfile } from "./common.js";
+import { vacationRequestsCardsData, userData } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -7,6 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   printSearchableVacationRequestsCardsPanel();
 
+  let userProfile = new UserProfile(
+    document.querySelector(".profile-summary .row > div:first-child"),
+    userData,
+    UserProfile.profileTypes[0]
+  );
+
+  userProfile.renderUserProfile();
 });
 
 /* ------------------------ start print latest new carousel ------------------------ */
@@ -98,7 +105,9 @@ function printSearchableVacationRequestsCardsPanel() {
     "vacation-requests-panel",
     vacationRequestsCardsData,
     getVacationRequestsCardElement,
+    "fa-solid fa-list-check",
     "vacation requests",
+    "/pages/requests.html",
     true
   );
 }

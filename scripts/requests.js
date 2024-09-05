@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         printCardsPanelHeader(
             document.querySelector(".vacation-requests__header-wrapper"),
+            "fa-solid fa-list-check",
             "vacation requests",
             "#vacation-requests .cards-panel__item",
             true

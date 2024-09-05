@@ -44,17 +44,20 @@ function appendScript(scriptUrl) {
 }
 
 // functions to print Cards Panel
-export async function printCardsPanel(cardsPanelContainer, cardsPanelId, cardsData, cardDataTocardElementFn, title, withSearch = false) {
+export async function printCardsPanel(cardsPanelContainer, cardsPanelId, cardsData,
+    cardDataTocardElementFn, iconClass, title, knowMoreLink, withSearch = false) {
 
     await printHTML(cardsPanelContainer, "/master_pages/cards-panel.html");
 
     //print cards panel
     let cardsPanel = cardsPanelContainer.firstChild;
     cardsPanel.id = cardsPanelId;
+    cardsPanel.querySelector(".cards-panel__view-more-btn").href = knowMoreLink;
+
     let cardsPanelHeaderContainer = cardsPanel.querySelector(".cards-panel__header-container");
     let cardsContainer = cardsPanel.querySelector(".cards-panel__cards-container");
 
-    printCardsPanelHeader(cardsPanelHeaderContainer, title, "#" + cardsPanel.id + " ." + "cards-panel__item", withSearch);
+    printCardsPanelHeader(cardsPanelHeaderContainer, iconClass, title, "#" + cardsPanel.id + " ." + "cards-panel__item", withSearch);
 
     printCards(cardsContainer, cardsData, cardDataTocardElementFn, 0, 3);
 }
@@ -70,13 +73,13 @@ export function printCards(cardsContainer, cardsData, cardDataTocardElementFn, f
 }
 
 //functions to print cards panel header with search or without
-export function printCardsPanelHeader(cardsPanelHeaderContainer, title, cardsItemsQuery, withSearch = false) {
+export function printCardsPanelHeader(cardsPanelHeaderContainer, iconClass, title, cardsItemsQuery, withSearch = false) {
 
     if (!cardsPanelHeaderContainer) {
         console.log("the problem in printCardsPanelHeader");
         return;
     }
-    cardsPanelHeaderContainer.appendChild(getCardsPanelHeader(title, withSearch));
+    cardsPanelHeaderContainer.appendChild(getCardsPanelHeader(title, iconClass, withSearch));
 
     appendStyle("/styles/cards-panel-header.css");
 
@@ -85,7 +88,7 @@ export function printCardsPanelHeader(cardsPanelHeaderContainer, title, cardsIte
         handelSearch(searchInput, cardsItemsQuery);
 }
 
-function getCardsPanelHeader(title, withSearch = false) {
+function getCardsPanelHeader(title, iconClass, withSearch = false) {
 
     let searchBarHtml = `
         <div
@@ -103,7 +106,7 @@ function getCardsPanelHeader(title, withSearch = false) {
     let cardsPanelHeader = `
         <div class="cards-panel-header d-lg-flex align-items-center pb-4">
             <div class="d-flex align-items-center">
-                <i class="fa-solid fa-list-check text-theme fs-2 me-3"></i>
+                <i class="${iconClass} text-theme fs-2 me-3"></i>
                 <h2 class="fs-4 fw-semibold mb-0">${title}</h2>
             </div>
             ${withSearch ? searchBarHtml : ""}
@@ -152,6 +155,177 @@ function displaySearchedItems(keyWord, itemsQuerySelector) {
     });
 }
 
+//if you want user profile
+export class UserProfile {
+
+    #container;
+    #userData;
+    static profileTypes = ["quick", "detailed"];
+    #profileType;
+
+    constructor(userProfileContainer, userData, profileType = "quick") {
+        this.#container = userProfileContainer;
+        this.#userData = userData;
+        this.#profileType = profileType;
+
+        this.#validate();
+    }
+
+    #validate() {
+        if (!(this.#container instanceof HTMLElement)) {
+            throw new Error("Invalid container: Must be an instance of HTMLElement.");
+        }
+
+        if (typeof this.#userData !== 'object' || this.#userData === null) {
+            throw new Error("Invalid userData: Must be a non-null object.");
+        }
+
+        // Check required properties in userData
+        const requiredProps = ['username', 'userJob', 'userDepartment',
+            'reportingTo', "img", "corporateLevel", "lifeTime", "vacationDaysLeft", "sickDaysLeft"];
+
+        for (const prop of requiredProps) {
+            if (!(prop in this.#userData)) {
+                throw new Error(`Missing required field in userData: ${prop}`);
+            }
+        }
+
+        // Validate profileType
+        if (!UserProfile.profileTypes.includes(this.#profileType)) {
+            throw new Error(`Invalid profileType: ${this.#profileType}. Valid options are: ${UserProfile.profileTypes.join(", ")}`);
+        }
+    }
+
+    renderUserProfile() {
+        (this.#profileType == UserProfile.profileTypes[0]) ? this.#renderProfileQuick() : this.#renderProfileDetailed();
+
+        this.#renderProfileSubData();
+    }
+
+    #renderProfileQuick() {
+        this.#container.innerHTML = `
+            <div
+            class="user-profile shadow p-4 rounded-4 bg-secondary h-100 text-center text-md-start"
+            >
+                <header
+                    class="user-profile__header d-flex flex-column flex-md-row align-items-center justify-content-between gap-3"
+                >
+                    <div
+                    class="user-profile__info d-flex flex-column flex-md-row align-items-center gap-3"
+                    >
+                    <figure
+                        class="user-profile__img-wrapper d-flex align-items-center rounded-pill mb-0 overflow-hidden"
+                    >
+                        <img
+                        src="${this.#userData.img}"
+                        alt="user image not found"
+                        class="img-fluid"
+                        />
+                    </figure>
+                    <div class="user-profile__name-job-wrapper">
+                        <h2 class="fs-5 mb-0 fw-semibold">${this.#userData.username}</h2>
+                        <span class="text-secondary">${this.#userData.userJob}</span>
+                    </div>
+                    </div>
+                    <a
+                    name="view profile"
+                    id="view-profile"
+                    class="btn btn-secondary"
+                    href="/pages/profiles.html"
+                    role="button"
+                    >view profile</a
+                    >
+                </header>
+                <div
+                    class="user-profile__data-wrapper d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-md-start gap-5 mt-5"
+                >
+                </div>
+        </div>
+        `;
+    }
+
+    #renderProfileDetailed() {
+        this.#container.innerHTML = `
+            <div
+            class="user-profile shadow p-4 rounded-4 bg-secondary h-100 text-center text-md-start"
+            >
+                <header
+                    class="user-profile__header d-flex flex-column flex-md-row align-items-center justify-content-between gap-3"
+                >
+                    <div
+                    class="user-profile__info d-flex flex-column flex-md-row align-items-center gap-3"
+                    >
+                    <figure
+                        class="user-profile__img-wrapper d-flex align-items-center rounded-pill mb-0 overflow-hidden"
+                    >
+                        <img
+                        src="${this.#userData.img}"
+                        alt="user image not found"
+                        class="img-fluid"
+                        />
+                    </figure>
+                    <div class="user-profile__name-job-wrapper">
+                        <h2 class="fs-5 mb-0 fw-semibold">${this.#userData.username}</h2>
+                        <span class="text-secondary-emphasis d-block">${this.#userData.userDepartment} Department</span>
+                        <span class="text-secondary">${this.#userData.userJob}</span>
+                    </div>
+                    </div>
+                    <a
+                    name="new request"
+                    id="view-profile"
+                    class="btn btn-main"
+                    role="button"
+                    >new request</a
+                    >
+                </header>
+                <div
+                    class="user-profile__data-wrapper d-flex flex-wrap mt-5 gap-5 justify-content-center justify-content-md-start justify-content-lg-between"
+                >
+                </div>
+        </div>
+        `;
+    }
+
+    #getUserProfileDataElementAsString(userSubData) {
+        console.log(userSubData);
+        return `
+        <div
+        class="user-profile__data d-flex flex-column flex-md-row gap-3 align-items-center"
+        >
+            <i class="${userSubData.iconClass} fs-1 text-secondary"></i>
+            <div>
+                <h4 class="fs-6 fw-semibold mb-1">${userSubData.label}</h4>
+                <span id="reporting-to" class="text-secondary">
+                ${userSubData.prefex}
+                 ${(this.#userData[userSubData.key]) ? this.#userData[userSubData.key] : "not found"}
+                 ${userSubData.suffix}</span>
+            </div>
+        </div>
+        `;
+    }
+
+    #renderProfileSubData() {
+
+        let userSubData = [
+            { key: "reportingTo", label: "reporting to", iconClass: "fa-solid fa-user", prefex: "", suffix: "" },
+            { key: "corporateLevel", label: "corporate level", iconClass: "fa-solid fa-chart-line", prefex: "level", suffix: "" },
+            { key: "lifeTime", label: "life time", iconClass: "fa-solid fa-hourglass", prefex: "", suffix: "years" },
+            { key: "vacationDaysLeft", label: "vacation days left", iconClass: "fa-solid fa-calendar-check", prefex: "", suffix: "Days" },
+            { key: "sickDaysLeft", label: "sick days left", iconClass: "fa-solid fa-stethoscope", prefex: "level", suffix: "Days" }
+        ];
+
+        let from = 0, to = userSubData.length - 1;
+        if (this.#profileType === UserProfile.profileTypes[0])
+            to = 1;
+
+        let userSubDataElements = '';
+        for (let i = from; i <= to; ++i) {
+            userSubDataElements += this.#getUserProfileDataElementAsString(userSubData[i]);
+        }
+
+        this.#container.querySelector(".user-profile__data-wrapper").innerHTML = userSubDataElements;
+    }
+}
 
 /** if you want pagination */
 export class CardSelectionHandler {
