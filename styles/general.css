@@ -18,6 +18,15 @@ html{
     width: fit-content;
 }
 
+.shadow-card{
+    box-shadow: rgba(0, 0, 0, 0.24)  0px 3px 4px;
+    transition: .3s;
+}
+
+.shadow-card:hover{
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
 .fs-14{
     font-size: 0.875rem;
 }

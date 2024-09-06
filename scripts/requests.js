@@ -80,7 +80,7 @@ function getVacationRequestsCardElement(vacationRequestsCardData) {
 
     cardElementTemp.innerHTML = `
     <div class="col cards-panel__item">
-        <div class="vacation-requests-card position-relative text-center bg-background p-3 rounded">
+        <div class="vacation-requests-card shadow-card position-relative text-center bg-background p-3 rounded">
             <span class='vacation-requests-card__select-icon position-absolute top-0 end-0'></span>
             <header class="d-sm-flex align-items-center gap-3">
                 <img loading='lazy'

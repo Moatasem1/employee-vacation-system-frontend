@@ -68,7 +68,9 @@ export const userData =
     "corporateLevel": "10",
     "lifeTime": "2.5",
     "vacationDaysLeft": 14,
-    "sickDaysLeft": 3
+    "sickDaysLeft": 3,
+    "vacationRequestsNumber": 10,
+    "leaveRequestsNumber": 10,
 };
 
 export const carouselItemsData = [

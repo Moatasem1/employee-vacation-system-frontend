@@ -3,6 +3,8 @@ import { getTopvacationRequestsCardsData, userData, carouselItemsData } from "./
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  fillUserGeneralInfo();
+
   renderUserQuickProfile();
 
   printLatestNewsCarousel(carouselItemsData);
@@ -10,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
   printSearchableVacationRequestsCardsPanel();
 });
 
+//fill User general info like username in welcom and no of vacation request and number of leave request
+function fillUserGeneralInfo() {
+
+  let userName = document.getElementById("user-name");
+  userName.innerText = userData.username.split(" ")[0];
+
+  let vacationRequestNumber = document.getElementById("vacation-requests-number");
+  let leaveRequestNumber = document.getElementById("leave-requests-number");
+
+  vacationRequestNumber.innerText = userData.vacationRequestsNumber;
+  leaveRequestNumber.innerText = userData.leaveRequestsNumber;
+}
 
 function renderUserQuickProfile() {
   let userProfile = new UserProfile(
@@ -114,7 +128,7 @@ function getVacationRequestsCardElement(vacationRequestsCardData) {
   cardElementTemp.innerHTML = `
      <div class="col cards-panel__item">
                 <div
-                  class="vacation-requests-card shadow-sm text-center bg-background p-3 rounded"
+                  class="vacation-requests-card shadow-card text-center bg-background p-3 rounded"
                 >
                   <header>
                     <img
