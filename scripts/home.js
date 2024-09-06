@@ -1,42 +1,32 @@
 import { printCardsPanel, UserProfile } from "./common.js";
-import { vacationRequestsCardsData, userData } from "./data.js";
+import { vacationRequestsCardsData, userData, carouselItemsData } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  printLatestNewsCarousel();
+  renderUserQuickProfile();
+
+  printLatestNewsCarousel(carouselItemsData);
 
   printSearchableVacationRequestsCardsPanel();
+});
 
+
+function renderUserQuickProfile() {
   let userProfile = new UserProfile(
+    //profile container
     document.querySelector(".profile-summary .row > div:first-child"),
+    //user data
     userData,
+    //profile type 0 for quick and 1 for detailed
     UserProfile.profileTypes[0]
   );
 
   userProfile.renderUserProfile();
-});
+}
 
 /* ------------------------ start print latest new carousel ------------------------ */
 
-function printLatestNewsCarousel() {
-
-  const carouselItemsData = [
-    {
-      img: "1.jpg",
-      title: "Empowering Growth: Our Path Forward",
-      desc: "We are excited to announce new opportunities for skill development and career growth within the company. Your dedication is paving the way for a brighter future for all of us."
-    },
-    {
-      img: "2.jpg",
-      title: "Celebrating Success: Team Achievements",
-      desc: "Our team’s hard work and collaboration have led to remarkable results this quarter. Let’s continue to build on this momentum and achieve even greater success together."
-    },
-    {
-      img: "3.jpg",
-      title: "Innovation in Action: Shaping Tomorrow",
-      desc: "We’re launching new initiatives that will drive innovation and creativity in our projects. Your ideas and efforts are vital as we shape the future of our industry."
-    }
-  ];
+function printLatestNewsCarousel(carouselItemsData) {
 
   let carouselItemsContainer = document.getElementById("latest-news-carousel-inner");
   let carouselIndicatorsContainer = document.getElementById("latest-news-carousel-indicators");
@@ -59,7 +49,7 @@ function getLatesNewsCarouselItemElement(imageData, id) {
   imgElmentTemp.innerHTML = `
          <div class="carousel-item ${id === 0 ? 'active' : ''}">
             <img
-                src="${"/assets/images/latest_news/" + imageData.img}"
+                src="${imageData.img}"
                 class="d-block w-100 img-fluid rounded"
                 alt="img slide ${id} not found"
             />
@@ -93,21 +83,27 @@ function getLatesNewsCarouselIndicatorElement(id) {
   return indicatorElmentTemp.firstElementChild;
 }
 
-/* ------------------------ end print latest new carousel ------------------------ */
-
 /* ------------------------ start print Searchable VacationReqeust Cards Panel ------------------------ */
 
 function printSearchableVacationRequestsCardsPanel() {
 
   let cardsPanelContainer = document.querySelector(".vacation-requests .container");
   printCardsPanel(
+    //panel container
     cardsPanelContainer,
+    //panel new id
     "vacation-requests-panel",
+    //vacation request data
     vacationRequestsCardsData,
+    //function to converte vacation request data to card HTML Element
     getVacationRequestsCardElement,
+    //icon class name 'font awesome'
     "fa-solid fa-list-check",
+    //title
     "vacation requests",
+    //view more link
     "/pages/requests.html",
+    //with search?
     true
   );
 }
@@ -172,5 +168,3 @@ function getVacationRequestsCardElement(vacationRequestsCardData) {
 
   return cardElementTemp.firstElementChild;
 }
-
-/* ------------------------ end print Searchable VacationReqeust Cards Panel ------------------------ */

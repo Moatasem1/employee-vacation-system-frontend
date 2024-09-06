@@ -55,6 +55,24 @@ export const userData =
     "sickDaysLeft": 3
 };
 
+export const carouselItemsData = [
+    {
+        img: "https://picsum.photos/id/200/1920/1080",
+        title: "Empowering Growth: Our Path Forward",
+        desc: "We are excited to announce new opportunities for skill development and career growth within the company. Your dedication is paving the way for a brighter future for all of us."
+    },
+    {
+        img: "https://picsum.photos/id/236/1920/1080",
+        title: "Celebrating Success: Team Achievements",
+        desc: "Our team’s hard work and collaboration have led to remarkable results this quarter. Let’s continue to build on this momentum and achieve even greater success together."
+    },
+    {
+        img: "https://picsum.photos/id/201/1920/1080",
+        title: "Innovation in Action: Shaping Tomorrow",
+        desc: "We’re launching new initiatives that will drive innovation and creativity in our projects. Your ideas and efforts are vital as we shape the future of our industry."
+    }
+];
+
 export const vacationHistoryData = [
     { "vacationType": "Non-Paid Vacation", "from": "15/8/2024", "to": "20/8/2024", "days": 6 },
     { "vacationType": "Annual Vacation", "from": "1/9/2024", "to": "10/9/2024", "days": 10 },
@@ -65,8 +83,8 @@ export const vacationHistoryData = [
 ];
 
 export const pendingRequest = [
-    { id: 1, img: `https://randomuser.me/api/portraits/men/1.jpg`, name: "Ahmad Attar", submittedDate: "1/3/2024", duration: "2 Weeks (1/4/2023 - 14/4/2023)", redirectedTo: "omare khalid" },
-    { id: 2, img: `https://randomuser.me/api/portraits/women/2.jpg`, name: "Sara Al-Hassan", submittedDate: "3/3/2024", duration: "3 Weeks (5/4/2023 - 25/4/2023)", redirectedTo: "omare khalid" },
-    { id: 3, img: `https://randomuser.me/api/portraits/men/3.jpg`, name: "Omar Khalid", submittedDate: "5/3/2024", duration: "1 Week (10/4/2023 - 17/4/2023)", redirectedTo: "omare khalid" },
-    { id: 4, img: `https://randomuser.me/api/portraits/women/4.jpg`, name: "Layla Samir", submittedDate: "7/3/2024", duration: "2 Weeks (12/4/2023 - 26/4/2023)", redirectedTo: "omare khalid" }
+    { submittedDate: "1/3/2024", duration: "2 Weeks (1/4/2023 - 14/4/2023)" },
+    { submittedDate: "3/3/2024", duration: "3 Weeks (5/4/2023 - 25/4/2023)" },
+    { submittedDate: "5/3/2024", duration: "1 Week (10/4/2023 - 17/4/2023)" },
+    { submittedDate: "7/3/2024", duration: "2 Weeks (12/4/2023 - 26/4/2023)" }
 ];

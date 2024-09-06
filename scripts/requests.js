@@ -2,16 +2,9 @@ import { printCardsPanelHeader, Pagination, CardSelectionHandler } from "./commo
 import { vacationRequestsCardsData } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-
     try {
-        printCardsPanelHeader(
-            document.querySelector(".vacation-requests__header-wrapper"),
-            "fa-solid fa-list-check",
-            "vacation requests",
-            "#vacation-requests .cards-panel__item",
-            true
-        );
 
+        renderVacationRequestsPanelHeader();
         renderPagination();
         handleCardsSelection();
 
@@ -20,20 +13,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+function renderVacationRequestsPanelHeader() {
+    printCardsPanelHeader(
+        //panel header container
+        document.querySelector(".vacation-requests__header-wrapper"),
+        //icon class use 'font awesome'
+        "fa-solid fa-list-check",
+        //panel header title
+        "vacation requests",
+        //query to the items or cards to attache search functionality with them
+        "#vacation-requests .cards-panel__item",
+        //apply search or not
+        true
+    );
+}
+
+// Render pagination navigatoin, display vacation request cards, and handle any updates
 function renderPagination() {
     let pagination = new Pagination(
+        //pagination navigation container
         document.querySelector(".vacation-request__pagination"),
+        //number of total cards, and number of cards in each page
         { cardsNumber: vacationRequestsCardsData.length, pageSize: 9 },
         {
+            //function to retreive subset of data base on page number
             getDataChunksFunction: getPagesData,
+            //function to converte card data to html element
             dataToCardElementFunction: getVacationRequestsCardElement,
+            //cards container
             cardsContainer: document.querySelector(".vacation-requests__cards-wrapper")
         }
 
     );
+
     pagination.renderPagination();
 }
 
+// selecting individual cards and select all
 function handleCardsSelection() {
     let cardSelectionHandler = new CardSelectionHandler(
         document.querySelector('.vacation-requests__cards-wrapper'),
@@ -113,6 +129,7 @@ function getVacationRequestsCardElement(vacationRequestsCardData) {
     return cardElementTemp.firstElementChild;
 }
 
+//Retrieve a subset of vacation request cards based on the current page number
 function getPagesData(pageNumber) {
 
     const numberOfCardsInPage = 9;

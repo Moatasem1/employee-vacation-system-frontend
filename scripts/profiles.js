@@ -3,54 +3,76 @@ import { userData, vacationHistoryData, pendingRequest } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    renderUserProfile();
+  renderDetailedUserProfile();
 
-    renderVacationHistoryPanel();
+  renderVacationHistoryPanel();
 
-    renderPendingRequestPanel();
+  renderPendingRequestPanel();
 });
 
-function renderUserProfile() {
-    let userProfile = new UserProfile(
-        document.querySelector("#user-profile .container"),
-        userData,
-        UserProfile.profileTypes[1]
-    );
+/*---------------------------- main functions ---------------------------- */
 
-    userProfile.renderUserProfile();
+function renderDetailedUserProfile() {
+  let userProfile = new UserProfile(
+    //profile container HTML element
+    document.querySelector("#user-profile .container"),
+    //user data
+    userData,
+    //profile type 1 for quick and 2 for detailed
+    UserProfile.profileTypes[1]
+  );
+
+  userProfile.renderUserProfile();
 }
 
 function renderVacationHistoryPanel() {
-    printCardsPanel(
-        document.querySelector("#history .container"),
-        "history-panel",
-        vacationHistoryData,
-        getVacationHistoryCardEl,
-        "fa-solid fa-clock-rotate-left",
-        "history",
-        "",
-        false
-    );
+  printCardsPanel(
+    //panel container HTML element
+    document.querySelector("#history .container"),
+    //panel new id
+    "history-panel",
+    //vacation history data
+    vacationHistoryData,
+    //function to converte history data to HTML card element
+    getVacationHistoryCardEl,
+    //icon class 'font awesome'
+    "fa-solid fa-clock-rotate-left",
+    //title
+    "history",
+    //view more link
+    "",
+    //with search
+    false
+  );
 }
 
 function renderPendingRequestPanel() {
-    printCardsPanel(
-        document.querySelector("#pending .container"),
-        "history-panel",
-        pendingRequest,
-        getPendingCardEl,
-        "fa-solid fa-spinner",
-        "pending requests",
-        "",
-        false
-    );
+  printCardsPanel(
+    //panel container
+    document.querySelector("#pending .container"),
+    //panel new id
+    "history-panel",
+    //pending request data
+    pendingRequest,
+    //function to converte each pending data to card Element
+    getPendingCardEl,
+    //icon class name 'font awesome'
+    "fa-solid fa-spinner",
+    //title
+    "pending requests",
+    //view more link
+    "",
+    //with search?
+    false
+  );
 }
 
+/*---------------------------- helper functions ---------------------------- */
 
 function getVacationHistoryCardEl(historyCardData) {
-    let historyCardWrapper = document.createElement("div");
+  let historyCardWrapper = document.createElement("div");
 
-    historyCardWrapper.innerHTML = `
+  historyCardWrapper.innerHTML = `
         <div class="col">
             <div
             class="vacation-history-card shadow-sm p-3 bg-background rounded"
@@ -61,19 +83,19 @@ function getVacationHistoryCardEl(historyCardData) {
                 <span class="fw-semibold ms-1">${historyCardData.days} Days</span>
             </p>
             <span class="text-secondary fw-medium"
-                >approved by: ${userData.username}</span
+                >approved by: ${userData.reportingTo}</span
             >
             </div>
         </div>
         `;
 
-    return historyCardWrapper.firstElementChild
+  return historyCardWrapper.firstElementChild
 }
 
 function getPendingCardEl(pendingCardData) {
-    let cardElementTemp = document.createElement("div");
+  let cardElementTemp = document.createElement("div");
 
-    cardElementTemp.innerHTML = `
+  cardElementTemp.innerHTML = `
        <div class="col cards-panel__item">
                   <div
                     class="vacation-requests-card shadow-sm text-center bg-background p-3 rounded"
@@ -81,10 +103,10 @@ function getPendingCardEl(pendingCardData) {
                     <header>
                       <img
                         class="vacation-requests-card__img rounded-pill shadow-sm"
-                        src="${pendingCardData.img}"
-                        alt="${pendingCardData.name.split(' ')[0]} image not found"
+                        src="${userData.img}"
+                        alt="${userData.username.split(' ')[0]} image not found"
                       />
-                      <h3 class="vacation-requests-card__employee-name fs-5 fw-semibold mt-2">${pendingCardData.name}</h3>
+                      <h3 class="vacation-requests-card__employee-name fs-5 fw-semibold mt-2">${userData.username}</h3>
                     </header>
                     <main class="text-start mt-3 fs-14">
                       <div>
@@ -102,11 +124,11 @@ function getPendingCardEl(pendingCardData) {
                     </main>
                     <footer class="mt-4 text-start">
                     <span class='d-block'>currently at:</span>
-                    <span class='text-theme fw-semibold'>${pendingCardData.redirectedTo}</span>
+                    <span class='text-theme fw-semibold'>${userData.reportingTo}</span>
                     </footer>
                   </div>
                 </div>
       `;
 
-    return cardElementTemp.firstElementChild;
+  return cardElementTemp.firstElementChild;
 }
