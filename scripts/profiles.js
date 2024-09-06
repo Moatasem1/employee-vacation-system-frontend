@@ -75,7 +75,7 @@ function getVacationHistoryCardEl(historyCardData) {
   historyCardWrapper.innerHTML = `
         <div class="col">
             <div
-            class="vacation-history-card shadow-sm p-3 bg-background rounded"
+            class="vacation-history-card shadow-card p-3 bg-background rounded"
             >
             <h2 class="fs-5 fw-semibold">${historyCardData.vacationType}</h2>
             <p class="text-secondary mb-3 fw-medium">
@@ -96,9 +96,9 @@ function getPendingCardEl(pendingCardData) {
   let cardElementTemp = document.createElement("div");
 
   cardElementTemp.innerHTML = `
-       <div class="col cards-panel__item">
+       <div class="col cards-panel__item ">
                   <div
-                    class="vacation-requests-card shadow-sm text-center bg-background p-3 rounded"
+                    class="vacation-requests-card shadow-card  text-center bg-background p-3 rounded"
                   >
                     <header>
                       <img

@@ -43,15 +43,6 @@
     height: 5rem;
 }
 
-.vacation-requests-card{
-    box-shadow: rgba(0, 0, 0, 0.24)  0px 3px 4px;
-    transition: .3s;
-}
-
-.vacation-requests-card:hover{
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-}
-
 .vacation-requests-card__select-icon::after{
     content: "\f058";
     position: absolute;
