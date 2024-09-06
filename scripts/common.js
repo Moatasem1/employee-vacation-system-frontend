@@ -334,20 +334,26 @@ export class CardSelectionHandler {
     #iconConfig;
     #SelectedCardAction;
     #selectAll;
+    #paginationNavigation;
     #withSelectAll;
+    #withPagination;
 
     constructor(
         cardsContainer,
         iconConfig = { checkIconClassName: '', checkedIconClassName: '' },
         SelectedCardAction,
         withSelectAll = true,
-        selectAll = null
+        selectAll = null,
+        withPagination = true,
+        paginationNavigation = null
     ) {
         this.#cardsContainer = cardsContainer;
         this.#iconConfig = iconConfig;
         this.#SelectedCardAction = SelectedCardAction;
         this.#selectAll = selectAll;
         this.#withSelectAll = withSelectAll;
+        this.#withPagination = withPagination;
+        this.#paginationNavigation = paginationNavigation;
 
         this.#validate();
     }
@@ -356,6 +362,10 @@ export class CardSelectionHandler {
 
         if (typeof this.#withSelectAll !== 'boolean') {
             throw new Error('Invalid withSelectAll: Expected a boolean.');
+        }
+
+        if (typeof this.#withPagination !== 'boolean') {
+            throw new Error('Invalid withPagination: Expected a boolean.');
         }
 
         if (!(this.#cardsContainer instanceof Element)) {
@@ -380,12 +390,29 @@ export class CardSelectionHandler {
         if (!(this.#selectAll instanceof Element)) {
             throw new Error('Invalid selectAll: Expected an Element or null.');
         }
+
+        if (!this.#withPagination)
+            return;
+
+        if (!(this.#paginationNavigation instanceof Element)) {
+            throw new Error('Invalid paginationNavigation: Expected an Element or null.');
+        }
     }
 
     handleCardsSelection() {
         this.#handleCardSelection();
+
         if (this.#withSelectAll)
             this.#handelAllCardsSelection();
+
+        if (this.#withSelectAll && this.#withPagination) {
+            this.#paginationNavigation.addEventListener("click", (event) => {
+                if (event.target && event.target.matches(".page-item")) {
+                    this.#handelAllCardsSelection();
+                    this.#updateSelectAll();
+                }
+            });
+        }
     }
 
     #handleCardSelection() {
@@ -393,7 +420,6 @@ export class CardSelectionHandler {
         this.#cardsContainer.addEventListener("click", (event) => {
             if (event.target && event.target.matches("." + this.#iconConfig.checkIconClassName)) {
 
-                console.log(this.#iconConfig.checkedIconClassName);
                 event.target.classList.toggle(this.#iconConfig.checkedIconClassName);
             }
 
@@ -405,8 +431,8 @@ export class CardSelectionHandler {
     }
 
     #updateSelectAll() {
-        let checkIcons = this.#cardsContainer.querySelector("." + this.#iconConfig.checkIconClassName);
-        let checkedIcons = this.#cardsContainer.querySelector("." + this.#iconConfig.checkedIconClassName);
+        let checkIcons = this.#cardsContainer.querySelectorAll("." + this.#iconConfig.checkIconClassName);
+        let checkedIcons = this.#cardsContainer.querySelectorAll("." + this.#iconConfig.checkedIconClassName);
 
         if (!checkIcons)
             throw Error("'checkIcons' undefined");
@@ -455,6 +481,7 @@ export class Pagination {
     #paginationContainer;
     #paginationConfig;
     #cardConfig;
+
     constructor(
         paginationContainer,
         { cardsNumber, pageSize },
@@ -500,7 +527,6 @@ export class Pagination {
 
                 let activePage = this.#navigation.querySelector(".page-item--active");
                 if (activePage) {
-                    console.log(activePage);
                     this.#renderPageContent(activePage.getAttribute("page"));
                     this.#handleNaviagationNumbers(activePage);
                 }
@@ -605,7 +631,8 @@ export class Pagination {
                     page='prev'
                     class="page-item page-item--disable rounded-pill d-flex align-items-center justify-content-center"
                 >
-                    <i class="fa-solid fa-angle-left fs-5"></i>
+                    <!--<i class="fa-solid fa-angle-left fs-5"></i>-->
+                    prev
                 </li>
                 <div class='d-flex align-items-center pagination__numbers'> </div>
                 <li
@@ -613,7 +640,8 @@ export class Pagination {
                     page='next'
                     class="page-item rounded-pill d-flex align-items-center justify-content-center"
                 >
-                    <i class="fa-solid fa-angle-right fs-5"></i>
+                    <!--<i class="fa-solid fa-angle-right fs-5"></i>--> 
+                    next
                 </li>
             </ul>
         `;

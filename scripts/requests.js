@@ -52,14 +52,24 @@ function renderPagination() {
 // selecting individual cards and select all
 function handleCardsSelection() {
     let cardSelectionHandler = new CardSelectionHandler(
+        //cards container HTmL Element
         document.querySelector('.vacation-requests__cards-wrapper'),
         {
+            //check icon class name
             checkIconClassName: "vacation-requests-card__select-icon ",
+            //modifier class when icon checked
             checkedIconClassName: "vacation-requests-card__select-icon--selected"
         },
+        //HTML element you want to appear when card check, and disappear when unchecked
         document.querySelector(".vacation-request-action"),
+        //with select all?
         true,
-        document.getElementById("select-all")
+        //select all HTML element
+        document.getElementById("select-all"),
+        //with pagination?
+        true,
+        //pagination navigation HTML,Element
+        document.querySelector(".pagination")
     );
 
     cardSelectionHandler.handleCardsSelection();
