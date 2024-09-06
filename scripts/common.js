@@ -473,7 +473,6 @@ export class CardSelectionHandler {
     }
 }
 
-
 /** if you want pagination */
 export class Pagination {
     #navigation;

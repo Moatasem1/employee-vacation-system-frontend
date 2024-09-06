@@ -1,4 +1,4 @@
-export const vacationRequestsCardsData = [
+export let vacationRequestsCardsData = [
     { id: 1, img: `https://randomuser.me/api/portraits/men/1.jpg`, name: "Ahmad Attar", submittedDate: "1/3/2024", duration: "2 Weeks (1/4/2023 - 14/4/2023)", salary: "1000 AED" },
     { id: 2, img: `https://randomuser.me/api/portraits/women/2.jpg`, name: "Sara Al-Hassan", submittedDate: "3/3/2024", duration: "3 Weeks (5/4/2023 - 25/4/2023)", salary: "1500 AED" },
     { id: 3, img: `https://randomuser.me/api/portraits/men/3.jpg`, name: "Omar Khalid", submittedDate: "5/3/2024", duration: "1 Week (10/4/2023 - 17/4/2023)", salary: "800 AED" },
@@ -41,6 +41,22 @@ export const vacationRequestsCardsData = [
     { id: 40, img: `https://randomuser.me/api/portraits/women/40.jpg`, name: "Maya Kassem", submittedDate: "19/5/2024", duration: "2 Weeks (20/10/2023 - 3/11/2023)", salary: "1400 AED" },
     { id: 41, img: `https://randomuser.me/api/portraits/men/40.jpg`, name: "Hadi Joudeh", submittedDate: "21/5/2024", duration: "1.5 Weeks (25/10/2023 - 7/11/2023)", salary: "1250 AED" }
 ];
+
+export function getTopvacationRequestsCardsData() {
+
+    let formateData = (data) => {
+
+        let day, month, year;
+
+        [day, month, year] = data.split("/");
+
+        return `${month}/${day}/${year}`;
+    };
+
+    vacationRequestsCardsData.sort((card1, card2) => new Date(formateData(card2.submittedDate)) - new Date(formateData(card1.submittedDate)));
+
+    return vacationRequestsCardsData.slice(0, 4);
+}
 
 export const userData =
 {

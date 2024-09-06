@@ -1,5 +1,5 @@
 import { printCardsPanel, UserProfile } from "./common.js";
-import { vacationRequestsCardsData, userData, carouselItemsData } from "./data.js";
+import { getTopvacationRequestsCardsData, userData, carouselItemsData } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -94,7 +94,7 @@ function printSearchableVacationRequestsCardsPanel() {
     //panel new id
     "vacation-requests-panel",
     //vacation request data
-    vacationRequestsCardsData,
+    getTopvacationRequestsCardsData(),
     //function to converte vacation request data to card HTML Element
     getVacationRequestsCardElement,
     //icon class name 'font awesome'
